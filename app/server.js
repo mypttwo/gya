@@ -3,6 +3,7 @@
 const app = require('./app');
 const port = require('./config').port;
 const logger = require('./logger');
+require('./db');
 
 app.listen(port, (error) => {
     if(error){
