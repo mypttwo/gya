@@ -11,6 +11,21 @@ router.use(bodyParser.urlencoded({extended : true}));
 
 module.exports = router;
 
+/**
+ * @swagger
+ * /users/:
+ *   get:
+ *     tags:
+ *       - users
+ *     description: Returns all users
+ *     produces:
+ *       - application/json
+ *     responses:
+ *       200:
+ *         description: An array of users
+ *         schema:
+ *           $ref: '#/definitions/user'
+ */
 router.get('/', (req, res) => {
     User.find().then((data) => {
         return res.status(200).send(data);

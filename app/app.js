@@ -3,8 +3,10 @@
 const express = require('express');
 const app = express();
 const logger = require('./logger');
+const swaggerUI = require('swagger-ui-express');
 
 let userController = require('./controllers/user-controller');
+let swaggerSpec = require('./swagger-spec-gen');
 
 
 app.use((req, res, next) => {
@@ -13,5 +15,6 @@ app.use((req, res, next) => {
 });
 
 app.use('/users', userController);
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerSpec));
 
 module.exports = app;

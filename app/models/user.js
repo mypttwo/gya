@@ -3,6 +3,18 @@
 const mongoose = require('../db');
 const walletSchema = require('./wallet').walletSchema;
 
+/**
+ * @swagger
+ * definitions:
+ *   user:
+ *     properties:
+ *       name:
+ *         type: string
+ *       email:
+ *         type: string
+ *       password:
+ *         type: string
+ */
 let userSchema = new mongoose.Schema({
     name : {
         type : String,
