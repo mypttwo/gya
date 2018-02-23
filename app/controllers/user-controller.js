@@ -26,8 +26,8 @@ module.exports = router;
  *         schema:
  *           $ref: '#/definitions/user'
  */
-router.get('/', (req, res) => {
-    User.find().then((data) => {
+router.get('/',  (req, res) => {
+    User.find().select({ password: 0 }).then((data) => {
         return res.status(200).send(data);
     }).catch((error) => {
         logger.error(`${error}`);
