@@ -1,13 +1,17 @@
 'use strict'
 
-const logger = require('./logger');
-const port = require('./config').port;
 const express = require('express');
 const app = express();
+const logger = require('./logger');
+
+let userController = require('./controllers/user-controller');
+
 
 app.use((req, res, next) => {
-    logger.info(`${req.method} ${req.baseUrl}`); 
+    logger.info(`${req.method} ${req.path}`); 
     next();
 });
+
+app.use('/users', userController);
 
 module.exports = app;
