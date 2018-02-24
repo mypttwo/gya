@@ -12,6 +12,14 @@ router.use(bodyParser.urlencoded({extended : true}));
 
 /**
  * @swagger
+ * definitions:
+ *   loginData:
+ *     properties:
+ *       email:
+ *         type: string
+ *       password:
+ *         type: string
+ * @swagger
  * /login:
  *   post:
  *     tags:
@@ -20,12 +28,12 @@ router.use(bodyParser.urlencoded({extended : true}));
  *     produces:
  *       - application/json
  *     parameters:
- *       - name: user object
+ *       - name: loginData object
  *         in: body
- *         description: user object
+ *         description: loginData object
  *         required: true
  *         schema:
- *           $ref: '#/definitions/user'
+ *           $ref: '#/definitions/loginData'
  *     responses:
  *       200:
  *         description: Successfully logged in
