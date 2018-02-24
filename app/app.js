@@ -7,6 +7,7 @@ const swaggerUI = require('swagger-ui-express');
 
 let userController = require('./controllers/user-controller');
 let registrationController = require('./controllers/regsitration-controller');
+let loginController = require('./controllers/login-controller');
 let swaggerSpec = require('./swagger-spec-gen');
 
 
@@ -17,6 +18,7 @@ app.use((req, res, next) => {
 
 app.use('/users', userController);
 app.use('/register', registrationController);
+app.use('/login',loginController);
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerSpec));
 
 module.exports = app;
