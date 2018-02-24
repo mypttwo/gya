@@ -6,6 +6,8 @@ const bodyParser = require('body-parser');
 const bcryptjs = require('bcryptjs');
 const logger = require('../logger');
 const User = require('../models/user').User;
+const generateAuthToken = require('../auth').generateAuthToken;
+const failureMessageLookup = require('../auth').messages;
 
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({extended : true}));
@@ -55,16 +57,17 @@ router.post('', (req, res) => {
     }
     User.findOne({email : req.body.email}).then((data) => {
         if(!data){
-            return res.status(404).send();
+            return res.status(404).send({auth : false, message : 'Auth Failed'});
         }
         let passwordIsValid = bcryptjs.compareSync(req.body.password, data.password);
         if(passwordIsValid){
-            return res.status(200).send('Logged in');
+            let token  = generateAuthToken(data._id);
+            return res.status(200).send({auth : true, token, userId : data._id});
         } else {
-            return res.status(403).send();
+            return res.status(403).send({auth : false, message : failureMessageLookup.getFailureMessage(failureMessageLookup.bad_pwd)});
         }
     }).catch((error) => {
-        return res.status(500).send('Nopes');
+        return res.status(500).send({auth : false, message : 'Auth Failed'});
     })
 });
 

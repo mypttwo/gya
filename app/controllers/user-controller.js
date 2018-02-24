@@ -5,6 +5,7 @@ const express = require('express');
 const router = express.Router();
 const bodyParser = require('body-parser');
 const User = require('../models/user').User;
+const verifyToken = require('../auth').verifyAuthToken;
 
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({extended : true}));
@@ -33,6 +34,41 @@ router.get('/',  (req, res) => {
         logger.error(`${error}`);
         return res.status(500).send('Server Error');        
     })
+});
+
+/**
+ * @swagger
+ * /users/{id}:
+ *   put:
+ *     tags: 
+ *       - users
+ *     description: Updates a single user
+ *     produces: application/json
+ *     parameters:
+ *       - name: user object
+ *         in: body
+ *         description: Updates a user
+ *         schema:
+ *            $ref: '#/definitions/user'
+ *       - name: id
+ *         in: path
+ *         description: User id
+ *       - name: x-access-token
+ *         in: header
+ *         description: authorization header
+ *         required: true
+ *         type: string
+ *     responses:
+ *       200:
+ *         description: Successfully updated
+ */
+router.put('/:id', verifyToken, (req, res) => {
+    User.findByIdAndUpdate(req.params.id, req.body, {new : true}, (error, data) => {
+        if(error){
+            res.status(500).send();
+        }
+        res.status(200).send(data);
+    });
 });
 
 
