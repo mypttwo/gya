@@ -71,5 +71,35 @@ router.put('/:id', verifyToken, (req, res) => {
     });
 });
 
+/**
+ * @swagger
+ * /users/{id}:
+ *   delete:
+ *     tags: 
+ *       - users
+ *     description: Deletes a single user
+ *     produces: application/json
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         description: User id
+ *       - name: x-access-token
+ *         in: header
+ *         description: authorization header
+ *         required: true
+ *         type: string
+ *     responses:
+ *       200:
+ *         description: Successfully deleted
+ */
+router.delete('/:id', verifyToken, (req, res) => {
+    User.findByIdAndRemove(req.params.id, (error, data) => {
+        if(error){
+            res.status(500).send();
+        }
+        res.status(200).send(data);
+    });
+});
+
 
 
