@@ -61,6 +61,12 @@ router.get('/',  (req, res) => {
  *     responses:
  *       200:
  *         description: Successfully updated
+ *       500:
+ *         description: Internal Error
+ *       403:
+ *         description: Authentication Failure
+ *       404:
+ *         description: Authentication Failure
  */
 router.put('/:id', verifyToken, (req, res) => {
     User.findByIdAndUpdate(req.params.id, req.body, {new : true}, (error, data) => {
@@ -91,6 +97,12 @@ router.put('/:id', verifyToken, (req, res) => {
  *     responses:
  *       200:
  *         description: Successfully deleted
+ *       500:
+ *         description: Internal Error
+ *       403:
+ *         description: Authentication Failure
+ *       404:
+ *         description: Authentication Failure
  */
 router.delete('/:id', verifyToken, (req, res) => {
     User.findByIdAndRemove(req.params.id, (error, data) => {
