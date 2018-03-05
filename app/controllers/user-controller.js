@@ -69,11 +69,10 @@ router.get('/',  (req, res) => {
  *         description: Authentication Failure
  */
 router.put('/:id', verifyToken, (req, res) => {
-    User.findByIdAndUpdate(req.params.id, req.body, {new : true}, (error, data) => {
-        if(error){
-            res.status(500).send();
-        }
+    User.findByIdAndUpdate(req.params.id, req.body, {new : true}).select({password : 0}).then((data) => {
         res.status(200).send(data);
+    }).catch((error) => {
+        res.status(500).send();
     });
 });
 
