@@ -1,7 +1,7 @@
 'use strict'
 
 const mongoose = require('../db');
-const walletSchema = require('./wallet').walletSchema;
+//const walletSchema = require('./wallet').walletSchema;
 
 /**
  * @swagger
@@ -27,8 +27,8 @@ let userSchema = new mongoose.Schema({
     },
     password : {
         type : String
-    },
-    wallets : [walletSchema]
+    }
+    //,wallets : [walletSchema]
 });
 
 mongoose.model('User', userSchema);
