@@ -5,12 +5,21 @@ const express = require('express');
 const router = express.Router();
 const bodyParser = require('body-parser');
 const User = require('../models/user').User;
+const Ballot = require('../models/ballot').Ballot;
 const verifyToken = require('../auth').verifyAuthToken;
 
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({extended : true}));
 
 module.exports = router;
+
+let verifyUser = function(req, res, next){
+    if(req.userId != req.params.id){
+        logger.error(`User ${req.userId} is attempting to modify data of user ${req.params.id}`);
+        return res.status(403).send({auth : false, message : messages.getFailureMessage(messages.verify_failed)});
+    }
+    next();
+}
 
 /**
  * @swagger
@@ -68,7 +77,7 @@ router.get('/',  (req, res) => {
  *       404:
  *         description: Authentication Failure
  */
-router.put('/:id', verifyToken, (req, res) => {
+router.put('/:id', verifyToken, verifyUser, (req, res) => {
     User.findByIdAndUpdate(req.params.id, req.body, {new : true}).select({password : 0}).then((data) => {
         res.status(200).send(data);
     }).catch((error) => {
@@ -103,12 +112,19 @@ router.put('/:id', verifyToken, (req, res) => {
  *       404:
  *         description: Authentication Failure
  */
-router.delete('/:id', verifyToken, (req, res) => {
+router.delete('/:id', verifyToken, verifyUser, (req, res) => {
     User.findByIdAndRemove(req.params.id, (error, data) => {
         if(error){
+            logger.error(`Could not delete User ${data._id} ${error}`);
             res.status(500).send();
         }
-        res.status(200).send(data);
+        Ballot.remove({creatorId : data._id}).then((data) => {
+            logger.info(`Deleted Ballots for User ${req.params.id}`);
+        }).catch((error) => {
+            logger.error(`Could not delete Ballots for user ${data._id} ${error}`);
+        });
+        logger.info(`Deleted User ${req.params.id}`);
+        res.status(200).send();
     });
 });
 

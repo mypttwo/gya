@@ -31,10 +31,6 @@ let verifyAuthToken = function(req, res, next){
             return res.status(404).send({auth : false, message : messages.getFailureMessage(messages.verify_failed)});
         }
         req.userId = data.id;
-        if(req.userId != req.params.id){
-            logger.error(`User ${req.userId} is attempting to modify data of user ${req.params.id}`);
-            return res.status(403).send({auth : false, message : messages.getFailureMessage(messages.verify_failed)});
-        }
         next();
     })
 }
