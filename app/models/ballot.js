@@ -20,6 +20,10 @@ const DeploymentStatus = require('./DeploymentStatus');
  *         type: array    
  *       creatorId:
  *         type: string
+ *       address:
+ *         type: string
+ *       jsonInterface:
+ *         type: string
  */
 let ballotSchema = new mongoose.Schema({
     name : {
@@ -32,6 +36,12 @@ let ballotSchema = new mongoose.Schema({
         type : [String]
     },
     creatorId : {
+        type : String
+    },
+    address : {
+        type : String
+    },
+    jsonInterface : {
         type : String
     }
 });
