@@ -55,7 +55,7 @@ If you would like to get a quick idea on the capabilities of the server follow t
 
  1. You can at any time **list all users** this endpoint 
  http://localhost:3000/api-docs/#/users/get_users_
- <sup>Todo : This is an unauthenticated call. This can be put behind authentication and authorization.</sup>
+ <sup><br/>Todo : This is an unauthenticated call. This can be put behind authentication and authorization.</sup>
  2. **Register a user** with appropriate credentials via this endpoint
  http://localhost:3000/api-docs/#/users/post_register.
  As a quick check you can now list users once again via
@@ -80,22 +80,22 @@ If you would like to get a quick idea on the capabilities of the server follow t
  5. **Deploy the smart contract** on Ethereum for a specific ballot via
  http://localhost:3000/api-docs/#/ballots/post_ballots__id__deploy.
  This may take a couple of minutes, so the call returns immediately. You will have to check back after a couple of minutes via http://localhost:3000/api-docs/#/ballots/get_ballots_
- <sup>Todo : This call gets all the ballots created in the db. An endpoint can be supported to get the specific ballot.</sup>  
+ <sup><br/>Todo : This call gets all the ballots created in the db. An endpoint can be supported to get the specific ballot.</sup>  
 Its also possible that an error may result *even if all works well*. 
 
 > ``Error: Transaction was not mined within 50 blocks, please make sure your transaction was properly sent. Be aware that it might still be mined!``
 
 This means that you may have to try deploying the smart contract again after some time. 
- <sup>Todo : Some kind of a queueing mechanism needs to be put in place so that if the smart contract fails to deploy the server automatically re-queues the smart contract for deployment without user intervention.</sup>  
+ <sup><br/>Todo : Some kind of a queueing mechanism needs to be put in place so that if the smart contract fails to deploy the server automatically re-queues the smart contract for deployment without user intervention.</sup>  
 
  6. **Vote for a candidate** via 
  http://localhost:3000/api-docs/#/ballots/post_ballots__id__vote
-  <sup>Todo : Currently no checks are maintained as to the number of times a user can vote. <br/>Todo : Also there is no check as to whether  the candidate exists.</sup>
+  <sup><br/>Todo : Currently no checks are maintained as to the number of times a user can vote. <br/>Todo : Also there is no check as to whether  the candidate exists.</sup>
   
  7. Finally **get the tally of votes** for all candidates via
  http://localhost:3000/api-docs/#/ballots/get_ballots__id__tally 
  
-<sup>Todos have also been listed with some endpoints which can be taken up later.</sup>
+<sup><br/>Todos have also been listed with some endpoints which can be taken up later.</sup>
 
 Apart from the above, the API also contains endpoints that handle the usual data CRUD stuff. 
 
