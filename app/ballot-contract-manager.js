@@ -2,7 +2,6 @@
 
 const logger = require('./logger');
 const ContractDeployer = require('./contract-deployer');
-//const ContractVoter = require('./contract-voter');
 const Ballot = require('./models/ballot').Ballot;
 const DeploymentStatus = require('./models/deploymentStatus');
 const infura_url_apikey = require('./config').infura_url_apikey;
