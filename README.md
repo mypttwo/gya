@@ -54,23 +54,23 @@ If you would like to get a quick idea on the capabilities of the server follow t
 *For the purposes of this walkthrough we will assume that your server is running on* *http://localhost:3000/*. 
 
  1. You can at any time **list all users** this endpoint 
- http://localhost:3000/api-docs/#/users/get_users_
+ http://localhost:3000/api-docs/#/users/get_users_.
  <sup><br/>Todo : This is an unauthenticated call. This can be put behind authentication and authorization.</sup>
  2. **Register a user** with appropriate credentials via this endpoint
- http://localhost:3000/api-docs/#/users/post_register.
+ http://localhost:3000/api-docs/#/users/post_register.<br/>
  As a quick check you can now list users once again via
-  http://localhost:3000/api-docs/#/users/get_users_
+  http://localhost:3000/api-docs/#/users/get_users_.<br/>
  If all has gone well you would see the user created in the list. 
  3. **Login the user** with appropriate credentials via 
- http://localhost:3000/api-docs/#/users/post_login
- If all has gone well again you should get a response as so
+ http://localhost:3000/api-docs/#/users/post_login.<br/>
+ If all has gone well again you should get a response as so <br/>
  ``{
   "auth": true,
   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVhYTE5MGJmZWRmZGZkMmI4MzUyYjMyOCIsImlhdCI6MTUyMDUzNzg0MiwiZXhwIjoxNTIwNjI0MjQyfQ.mXiGsy2AfzgvCstr4w5dwXLWJAzBdjtQl6KBZaI4cyI",
   "userId": "5aa190bfedfdfd2b8352b328"
 }
 ``
-*You will need the ``token`` and the ``userId`` for further calls.* 
+*<br/>You will need the ``token`` and the ``userId`` for further calls.* 
  4. **Create a ballot** using 
  http://localhost:3000/api-docs/#/ballots/post_ballots
  This is an authenticated call so you would need to add the ``token`` as a part of the  ``x-access-token``header.
@@ -78,8 +78,8 @@ If you would like to get a quick idea on the capabilities of the server follow t
  *You will need the ballot  ``id`` for further calls.* 
  
  5. **Deploy the smart contract** on Ethereum for a specific ballot via
- http://localhost:3000/api-docs/#/ballots/post_ballots__id__deploy.
- This may take a couple of minutes, so the call returns immediately. You will have to check back after a couple of minutes via http://localhost:3000/api-docs/#/ballots/get_ballots_
+ http://localhost:3000/api-docs/#/ballots/post_ballots__id__deploy.<br/>
+ This may take a couple of minutes, so the call returns immediately. You will have to check back after a couple of minutes via http://localhost:3000/api-docs/#/ballots/get_ballots_.
  <sup><br/>Todo : This call gets all the ballots created in the db. An endpoint can be supported to get the specific ballot.</sup>  
 Its also possible that an error may result *even if all works well*. 
 
@@ -89,7 +89,7 @@ This means that you may have to try deploying the smart contract again after som
  <sup><br/>Todo : Some kind of a queueing mechanism needs to be put in place so that if the smart contract fails to deploy the server automatically re-queues the smart contract for deployment without user intervention.</sup>  
 
  6. **Vote for a candidate** via 
- http://localhost:3000/api-docs/#/ballots/post_ballots__id__vote
+ http://localhost:3000/api-docs/#/ballots/post_ballots__id__vote.
   <sup><br/>Todo : Currently no checks are maintained as to the number of times a user can vote. <br/>Todo : Also there is no check as to whether  the candidate exists.</sup>
   
  7. Finally **get the tally of votes** for all candidates via
@@ -97,7 +97,7 @@ This means that you may have to try deploying the smart contract again after som
  
 <sup><br/>Todos have also been listed with some endpoints which can be taken up later.</sup>
 
-Apart from the above, the API also contains endpoints that handle the usual data CRUD stuff. 
+<br/>Apart from the above, the API also contains endpoints that handle the usual data CRUD stuff. 
 
 ## Acknowledgements
 
