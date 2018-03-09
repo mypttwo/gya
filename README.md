@@ -74,7 +74,7 @@ If you would like to get a quick idea on the capabilities of the server follow t
  4. **Create a ballot** using 
  http://localhost:3000/api-docs/#/ballots/post_ballots
  This is an authenticated call so you would need to add the ``token`` as a part of the  ``x-access-token``header.
- You will need to list the candidates with double quotes not single quotes. For instance ["Pam", "Sam", "VanDam"].  
+ You will need to list the candidates with double quotes not single quotes. For instance ``["Pam", "Sam", "VanDam"]`` will work; ``['Pam', 'Sam', 'VanDam']`` will not.  <br/>
  *You will need the ballot  ``id`` for further calls.* 
  
  5. **Deploy the smart contract** on Ethereum for a specific ballot via
