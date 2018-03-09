@@ -13,16 +13,12 @@ const DeploymentStatus = require('./DeploymentStatus');
  *       deploymentStatus:
  *         type: string
  *         enum: 
- *              - PENDING
- *              - INPROGRESS
- *              - DEPLOYED 
- *       options: 
+ *              - 0 
+ *              - 1 
+ *              - 2  
+ *       candidates: 
  *         type: array    
  *       creatorId:
- *         type: string
- *       address:
- *         type: string
- *       jsonInterface:
  *         type: string
  */
 let ballotSchema = new mongoose.Schema({
@@ -32,7 +28,7 @@ let ballotSchema = new mongoose.Schema({
     deploymentStatus : {
         type : DeploymentStatus
     },
-    options :{
+    candidates :{
         type : [String]
     },
     creatorId : {

@@ -48,6 +48,39 @@ router.get('/',  (req, res) => {
 /**
  * @swagger
  * /users/{id}:
+ *   get:
+ *     tags:
+ *       - users
+ *     description: Returns the user by id
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         description: User id
+ *       - name: x-access-token
+ *         in: header
+ *         description: authorization header
+ *         required: true
+ *         type: string 
+ *     responses:
+ *       200:
+ *         description: An array of users
+ *         schema:
+ *           $ref: '#/definitions/user'
+ */
+router.get('/:id',  (req, res) => {
+    User.findById().select({ password: 0 }).then((data) => {
+        return res.status(200).send(data);
+    }).catch((error) => {
+        logger.error(`${error}`);
+        return res.status(500).send('Server Error');        
+    })
+});
+
+/**
+ * @swagger
+ * /users/{id}:
  *   put:
  *     tags: 
  *       - users
